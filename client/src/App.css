@@ -1,0 +1,234 @@
+*{
+    margin: 0; 
+    padding: 0;
+  }
+  body{
+    overflow-x:  hidden !important ;
+  
+  }
+  /* h2{
+    font-family: 'Lobster', cursive !important;
+  } */
+  .c-border{
+  
+    border: 4px double black;
+  }
+  .f-height{
+    min-height: 75vh;
+  }
+  
+  
+  /* Register.js */
+  .register-body{
+    background-image: linear-gradient(to right,#ff5722,#ff9800);  
+  }
+  .register-left{
+    
+    text-align: center;
+    color: #fff;
+    /* border: 2px solid black; */
+    padding: 1vh 10vh;
+  }
+  
+  .register-left p{
+    padding: 20px 20px 0;
+  }
+  
+  .register-left .btn-register{
+    border-radius: 1.5rem;
+    border: none;
+    width: 120px;
+    background: #f8f8f8 ;
+    font-weight: 600;
+    color: #555;
+    margin-top: 2.7vh;
+    padding: 10px;
+    letter-spacing: 1px
+  }
+  
+  .register-left .btn-register:hover{
+    background: #000;
+    color: white
+  }
+  
+  .register-left img{
+    margin:60px 0 18px 0;
+    width: 80px;
+    animation: mover 1s infinite alternate
+  }
+  
+  @keyframes mover{
+    0%{ transform: translateY(0)}
+    100%{ transform: translateY(-20px)}
+  }
+  
+  .nav-link{
+    font-weight: 600;   
+    color: black;
+    
+  }
+  .active1{
+    background: rgb(189, 181, 181) !important;    
+    color:white !important;
+  }
+  
+  .nav-link{
+    
+  }
+  .register-right{
+    border:none;
+    background: #f8f8f8;
+    border-top-left-radius: 10% 50%;
+    border-bottom-left-radius: 10% 50%;
+    /* padding: 3vh 10vh !important; */
+  }
+  .register-right h3{
+    text-align: center;
+    margin-top: 1vh;
+    color: #555
+  }
+  
+  .register-right .btn-register{
+    border-radius: 1.5rem;
+    border: none;
+    width: 150px;  
+    font-weight: 600;
+    color: #555;  
+    padding: 12px;
+    float: right;
+    background: #ff9800;
+    color: #fff !important;
+    letter-spacing: 1px
+  }
+  
+  .register-right .btn-register:hover{
+    background: #ff5722;
+    
+  }
+  .btn-sm-register{
+    border:none;
+    width: 200px;
+    margin-right: 0;  
+    padding: 10px 15px;
+    background: #f8f8f8 ;
+    font-weight: 600;
+    color: #555;
+    border-radius: 10px;
+  }
+  
+  
+  .btn-login{
+    border-radius: 1.5rem;
+    border: none;      
+    font-weight: 600;   
+    padding:  .6rem .75rem !important;
+    float: right;
+    background: #ff9800 !important;
+    color: #fff !important;
+    letter-spacing: 1px
+  }
+  
+  h3{
+    font-family: 'Montaga', serif;
+  }
+  .form-c .active{
+    color: #FF5E1E !important;
+  }
+  
+  .logo{
+    width:8.75rem;
+    height: 3.125rem;
+    
+  }
+  
+  .login-align {
+    width: 100%; 
+    text-align: center; 
+    border-bottom: 1px solid #000; 
+    line-height: 0.2em;
+    margin: 15px 0 20px; 
+  } 
+  
+  .login-align span { 
+     background:#fff; 
+     padding:3px 10px; 
+     font-size: 18px;
+     border-radius: 10px;
+  }
+  
+  .wrong{
+    color: red;
+    font-weight: 600;
+    text-align: center;
+    
+  }
+  .right{
+    color: green;
+    text-align: center;
+    font-weight: 600;
+    
+  }
+  .step-container{
+    background: #ccc3b51a;
+    overflow: hidden;
+    
+  }
+  #hr{
+   position: absolute;
+  }
+  .step-div{
+    background: rgb(233, 231, 231);
+    padding: 1rem;
+    border-radius: 50%;
+    border:2px solid black;
+  }
+  .title{
+    color: yellow !important
+  }
+
+
+.spec-ul{
+  background: rgb(71, 69, 69);
+  text-align: justify;
+  padding: 0.1em;
+  list-style: none;
+  border-radius:4px;
+  min-height: 4.167em;
+}
+.spec-li{
+  background: white;
+  display: inline-block;
+  padding: 0.2em 0.5em;
+  margin:  0.417em;
+  font-weight: 400;
+}
+
+.spec-btn{
+  color: black;
+  background:yellowgreen;
+}
+
+.education-table{
+  
+  width: 100%;
+  padding: 5px;
+  border:5px double black;
+  border-bottom-right-radius: 10px;
+}
+.education-table td,.education-table th {
+  padding: 2px 4px;
+  border: 2px solid black;
+}
+  /* @media only screen and (max-width: 600px) {
+    .register{
+      display: none !important;
+    }
+  }
+  
+  @media only screen and (min-width: 600px) {
+    .login{
+      display: none !important;
+    }
+  } */
+  
+  
