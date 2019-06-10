@@ -1,14 +1,33 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import { connect } from "react-redux";
+import {doctorProfile } from "../../actions/authActions";
 import {  MDBTable, MDBTableBody, MDBTableHead ,MDBContainer, MDBRow, MDBCol,  MDBBtn, MDBCard, MDBCardBody, MDBInput } from "mdbreact";
-export default class Profile extends Component {
+ class Profile extends Component {
     state={
-        data:{}
+        data:[]
     }
+    // componentDidMount(){
+    //     axios.get('http://localhost:8080/dashboard_doctor').then(res=>{
+    //         console.log("Get Doctor Profile Data"+JSON.stringify(res));
+    //         this.setState({data:res.data.DoctorProfile})
+            
+    //     }).catch(err=>console.log("fetch doctor profile error "+err))
+    // }
     componentDidMount(){
-        axios.get('http://localhost:8080/')
+        // this.setState({data:this.props.auth.user})
+         console.log("FETCH DOCTOR PROFILE COMPDIDMOUNT")
+        this.props.doctorProfile();
+            // this.setState({data:this.props.test.doctor})
+            // this.setState({data:this.props.test.doctor},()=>{
+            //     console.log("doctorProfile "+JSON.stringify(this.state.data))
+            // })
+        
     }
+   
     render() {
+       const{doctor}=this.props.test;
+       
         return (
             <MDBContainer className="mb-5">
             <MDBCard>
@@ -17,33 +36,44 @@ export default class Profile extends Component {
                     <MDBCol>
                          <h2>Profile Page</h2>
                          <MDBTable striped responsive hover>
-      {/* <MDBTableHead>
-        <tr>
-          <th>#</th>
-          <th>Course Name</th>
-          <th>Insitution Name</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-        </tr>
-      </MDBTableHead> */}
+     
       <MDBTableBody>
       <tr>
-          <th>NAME</th> <td>Abhishek</td>          
+          <th>NAME</th>
+           <td>{doctor.first_name}</td>          
       </tr>
       <tr>
-          <th>UserID</th> <td>Abhishek</td>          
+          <th>UserID</th>
+          <td>{doctor.user_id}</td>          
       </tr>
       <tr>
-          <th>Email</th> <td>Abhishek</td>          
+          <th>Email</th>
+          <td>{doctor.email}</td>          
       </tr>
       <tr>
-          <th>Mobile</th> <td>Abhishek</td>          
+          <th>Mobile</th>
+          <td>{doctor.mobile}</td>           
       </tr>
       <tr>
-          <th>Education</th> <td>Abhishek</td>          
+          <th>Education</th>
+            <td>
+               <tr><td>{}</td></tr>
+               <tr>
+               {
+                    console.log(JSON.stringify(doctor['education']))
+            
+            //  console.log("PROFILE EDUCATION KEYS:"+Object.keys(doctor.education).length)
+            //  Object.keys(doctor.education).map(key=>{
+            //      console.log(doctor.education[key])
+            //  })
+               
+            }
+               </tr>
+           </td>          
       </tr>
       <tr>
-          <th>Specialization</th> <td>Abhishek</td>          
+          <th>Specialization</th>
+          {/* <td>{this.state.data.specialization}</td>           */}
       </tr>
             
             
@@ -61,3 +91,12 @@ export default class Profile extends Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    test:state.auth
+  });
+  
+  export default connect(
+    mapStateToProps,
+    {doctorProfile}
+  )(Profile);

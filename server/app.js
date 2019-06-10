@@ -18,6 +18,9 @@ var set_schedule_doctor_router=require('./routes/DoctorSetSchedule1');
 var get_schedule_doctor_router=require('./routes/DoctorGetSchedule');
 var save_prescription_router=require('./routes/DoctorPreparePrescription');
 var loginRouter=require('./routes/Login');
+var get_doctor_profile_router=require('./routes/GetDoctorProfile');
+
+
 
 var app = express();
 app.use(cors());
@@ -52,6 +55,7 @@ app.use('/verify_email_doctor',verify_email_doctor_router);
 app.use('/set_schedule_doctor',set_schedule_doctor_router);
 app.use('/get_schedule_doctor',get_schedule_doctor_router);
 app.use('/save_prescription',save_prescription_router);
+app.use('/dashboard_doctor',get_doctor_profile_router);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

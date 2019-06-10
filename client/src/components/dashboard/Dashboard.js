@@ -12,8 +12,9 @@ class Dashboard extends Component {
   };
 
   render() {
+   
     const { user } = this.props.auth;
-
+    //console.log("this.props.auth.user"+JSON.stringify(this.props));
     return (
       <div style={{ height: "75vh" }} className="container-fluid text-center valign-wrapper">
         <div className="row   mx-auto">
@@ -42,7 +43,7 @@ class Dashboard extends Component {
         <div className="row">
            {/* <VerticalLinearStepper /> */}
            <Switch>
-           <Route path="/dashboard/" exact component={Profile} />
+           <Route path="/dashboard" exact component={Profile} />
            <Route  path="/dashboard/profile" component={StepperExample} />
            </Switch>
             {/* <StepperExample />  */}

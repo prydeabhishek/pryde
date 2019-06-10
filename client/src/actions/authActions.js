@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING } from "./types";
+import { GET_ERRORS, SET_CURRENT_USER, USER_LOADING ,PROFILE_DATA} from "./types";
 import setAuthToken from '../utils/setAuthToken'
 // Register User
 export const registerUser = (userData, history) => dispatch => {
@@ -25,7 +25,7 @@ export const loginUser = userData => dispatch => {
       // Save to localStorage
 
       // Set token to localStorage
-      console.log(res);
+      console.log("LOGINRESPONSE_data"+JSON.stringify(res.data));
       const { csrf_token,auth_token,email,user} = res.data;
       localStorage.setItem("csrf_token", csrf_token);
       localStorage.setItem("auth_token", auth_token);
@@ -37,14 +37,26 @@ export const loginUser = userData => dispatch => {
        // Set current user
        console.log("USER: "+JSON.stringify(user))
        dispatch(setCurrentUser(user));
+      
     })
     .catch(err =>{
-     // console.log("ERROR: "+JSON.stringify(err.response.data));
-     console.log("ERROR: "+JSON.stringify(err));
-      dispatch({
+     // console.log("ERROR: "+JSON.stringify(err.response.data))
+     if(Object.keys(err).length>0 && typeof err.response !=='undefined'){
+      //  console.log("TYPEOF ERROR"+typeof err);       
+      //  console.log("authAction if err.response.data triggered"+err.response.data);
+       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       })
+     }
+     else{
+      console.log("authAction err.response.data else triggered"+err);
+      dispatch({
+       type: GET_ERRORS,
+       payload: err
+     })
+     }
+      
     }
     );
 };
@@ -66,18 +78,18 @@ export const setUserLoading = () => {
 };
 
 // Profile Update
-
 export const profileUser = (userData, history) => dispatch => {
   console.log("ACTION PROFILE DATA"+JSON.stringify(userData));
   //var csrf_token = localStorage.getItem('csrf_token');
-  var auth_token = localStorage.getItem('auth_token');
-  var email = localStorage.getItem('email');
-  //console.log("CSRF_TOKEN :"+csrf_token);
-  
-  
+ 
+  //console.log("CSRF_TOKEN :"+csrf_token);  
   axios.post('http://localhost:8080/profile_doctor',userData)
     .then(res =>{ console.log("Profile Response :"+JSON.stringify(res));
-                  localStorage.setItem('csrf_token',res.data.new_csrf_token)
+                  localStorage.setItem('csrf_token',res.data.new_csrf_token);
+                  var auth_token = localStorage.getItem('auth_token');
+                  var email = localStorage.getItem('email');
+                  var csrf_token=localStorage.getItem('csrf_token');
+                  setAuthToken(csrf_token,auth_token,email);
                    history.push("/dashboard/profile")
                   })
     .catch(err => {console.log(err)
@@ -88,6 +100,43 @@ export const profileUser = (userData, history) => dispatch => {
     }
     );
 };
+
+
+// Fetch Doctor Profile Data
+export const doctorProfile = () => dispatch => {
+ // console.log("ACTION PROFILE DATA"+JSON.stringify(userData)); 
+  
+  axios.get('http://localhost:8080/dashboard_doctor')
+    .then(res =>{ console.log("Fetch DoctorProfile Response :"+JSON.stringify(res));
+                  localStorage.setItem('csrf_token',res.data.new_csrf_token);
+                  var auth_token = localStorage.getItem('auth_token');
+                  var email = localStorage.getItem('email');
+                  var csrf_token=localStorage.getItem('csrf_token');
+                  setAuthToken(csrf_token,auth_token,email);
+                  dispatch({                    
+                    type: PROFILE_DATA,
+                    payload:res.data.status
+                })
+                  
+                  // history.push("/dashboard/profile")
+                  })
+    .catch(err => {console.log(err)
+      dispatch({
+        type: GET_ERRORS,
+        payload: err
+      })
+    }
+    );
+};
+
+// Set DATA for FETCH_DOCTOR_PROFILE
+// export const setFetchDataDoctor = data => {
+//   console.log("SET_DOCTOR_DATA: "+JSON.stringify(data));
+//   return {                    
+//     type: PROFILE_DATA,
+//     payload:data
+// }
+// };
 
 
 // Log user out

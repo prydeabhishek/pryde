@@ -19,7 +19,7 @@ state = {
   formActivePanel1Changed: false,
   data:{
     specialization: {},
-    education:{}
+    education:[]
   },
   
 }
@@ -88,12 +88,19 @@ addSpecicalization = (specialization)=> {
    }
  
  addEducation = (education)=> {
+   debugger;
     //create a unike key for each new fruit item
     var timestamp = (new Date()).getTime();
     // update the state object
-    this.state.data.education['education-' + timestamp ] = education;
+   // this.state.data.education['education-' + timestamp ] = education;
+   this.state.data.education['education-' + timestamp ] = education;
     // set the state
-    this.setState({ [this.state.data.education] : this.state.data.education});
+    console.log("*************______________***************");
+    console.log(this.state.data.education['education-' + timestamp ])
+    let temp=this.state.data.education['education-' + timestamp ]
+    let temp2=this.state.data.education.push(temp);
+    this.setState({[this.state.data.education]:temp2});
+  //  this.setState({ [this.state.data.education] : this.state.data.education});
     console.log("Education LIST:" +JSON.stringify(this.state.data.education))
    }
    
