@@ -13,12 +13,13 @@ var nodeMailer = require('nodemailer');
 
  module.exports={
        send_email:(user)=>{
+           console.log("INSIDE SENDEMAIL1:"+JSON.stringify(user));
         let mailOptions = {
             from: '"Pryde Healthcare" <xx@gmail.com>', // sender address
              to: user.email, // list of receivers
-             subject: "Account Activated", // Subject line
+             subject: "Activate Account", // Subject line
              text: `Congratulations ${user.first_name} Your account is activated `, // plain text body
-             html: `Congratulations <strong>${user.first_name}</strong> Your account is activated `
+             html: 'Hello<strong>' +user.first_name+ '</strong>,<br><br> <a href="http://localhost:3001/verify/'+user.email_verification_code +'">ACTIVATE </a>'
             };  
         transporter.sendMail(mailOptions, (error, info) => {
             if (error) {

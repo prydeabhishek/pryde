@@ -93,13 +93,16 @@ addSpecicalization = (specialization)=> {
     var timestamp = (new Date()).getTime();
     // update the state object
    // this.state.data.education['education-' + timestamp ] = education;
-   this.state.data.education['education-' + timestamp ] = education;
+   //this.state.data.education['education-' + timestamp ] = education;
     // set the state
     console.log("*************______________***************");
-    console.log(this.state.data.education['education-' + timestamp ])
-    let temp=this.state.data.education['education-' + timestamp ]
-    let temp2=this.state.data.education.push(temp);
-    this.setState({[this.state.data.education]:temp2});
+    //console.log(this.state.data.education['education-' + timestamp ]);
+    //console.log("EDUcation:"+this.state.data.education)
+    let temp=this.state.data.education;
+    let temp2=temp.push(education);
+    console.log("TEMP2:"+temp2);
+    console.log("TEMP1:"+JSON.stringify(temp))
+    this.setState({[this.state.data.education]:temp});
   //  this.setState({ [this.state.data.education] : this.state.data.education});
     console.log("Education LIST:" +JSON.stringify(this.state.data.education))
    }

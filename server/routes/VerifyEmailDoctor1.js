@@ -5,16 +5,17 @@ const con=require('../database_connection/mongoConnection').con();
 const sendMail=require('../UtilityClasses/SendEmail').send_email;
 var jwt = require('jsonwebtoken');
 router.put("/:token", (req, res) => {
-   
+     console.log("INSIDE VERIFYEMAILDOCTOR1");
     con.then((db)=>{ 
    
         db.collection('DoctorProfile').findOne({ email_verification_code: req.params.token }).then( (user) => 
         {
-            console.log("USER :"+user)
+            console.log("VERIFYEMAILDOCTOR USER :"+JSON.stringify(user))
             
 
    // User.findOne({ email_verification_code: req.params.token }, (err, user) => {
-    const token = req.params.token; // Save the token from URL for verification
+   console.log("VERIFYEMAILDOCTOR TOKEN:"+req.params.token)
+   const token = req.params.token; // Save the token from URL for verification
     //console.log("the token is", token);
     // Function to verify the user's token
     jwt.verify(token, 'shhhhh', (err, decoded) => {

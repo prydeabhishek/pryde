@@ -8,7 +8,8 @@ const isEmpty = require("is-empty");
 class NavbarPage extends Component {
 state = {
   isOpen: false,
-  doctor_loggedIn:false
+  doctor_loggedIn:false,
+  showMenu:false
 };
 onLogoutClick=(e)=>{
   e.preventDefault();
@@ -20,9 +21,11 @@ toggleCollapse = () => {
 }
 
 componentWillReceiveProps(nextProps){
+  debugger;
   let loggedIn=localStorage.getItem('email');
+
   if (nextProps) {
-    this.setState({doctor_loggedIn:!isEmpty(loggedIn)})
+    this.setState({doctor_loggedIn:!isEmpty(loggedIn),showMenu:nextProps.auth.isAuthenticated})
   } 
   console.log("Logged in: "+loggedIn);
   
@@ -38,7 +41,7 @@ render() {
       </MDBNavbarBrand>
       <MDBNavbarToggler onClick={this.toggleCollapse} />
       <MDBCollapse  isOpen={this.state.isOpen} navbar>
-        {this.state.doctor_loggedIn &&
+        {this.state.showMenu &&
        <>
         <MDBNavbarNav left >
           {/* <MDBNavItem className="acti">
@@ -61,7 +64,7 @@ render() {
               <MDBDropdownMenu >
                 {/* <Link to="/doctor" className="dropdown-item ">Logout</Link> */}
                 <MDBDropdownItem onClick={this.onLogoutClick}>Logout</MDBDropdownItem>
-                
+                <MDBDropdownItem onClick={this.onChangePassword}>Change Password</MDBDropdownItem>
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>

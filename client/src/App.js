@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import {  Route, Switch } from "react-router-dom";
+import {  Route, Switch ,Redirect} from "react-router-dom";
 
 
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
-
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 
 import NavbarPage from "./components/layout/Navbar2";
@@ -13,6 +12,7 @@ import LoginLanding from "./components/layout/LoginLanding";
 import RegisterLanding from "./components/layout/RegisterLanding";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+import ShowVerifyEmail from './components/auth/ShowVerifyEmail'
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import Token from "./components/auth/Token";
@@ -48,7 +48,10 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route path="/register" component={RegisterLanding} />
             <Route  path="/login" component={LoginLanding} />
+            <Route  path="/showVerifyEmail" component={ShowVerifyEmail} />
+           
             <Switch>
+            {/* <Route component={NoMatch} /> */}
               <PrivateRoute  path="/dashboard" component={Dashboard} />
               {/* <Route  path="/profile" component={Profile} /> */}
             </Switch>
@@ -58,3 +61,10 @@ class App extends Component {
   }
 }
 export default App;
+
+
+const NoMatch = ({ location }) => (
+  <div>
+    <h3>No match for <code>{location.pathname}</code></h3>
+  </div>
+)

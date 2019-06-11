@@ -14,7 +14,7 @@ import {  MDBTable, MDBTableBody, MDBTableHead ,MDBContainer, MDBRow, MDBCol,  M
             
     //     }).catch(err=>console.log("fetch doctor profile error "+err))
     // }
-    componentDidMount(){
+    componentWillMount(){
         // this.setState({data:this.props.auth.user})
          console.log("FETCH DOCTOR PROFILE COMPDIDMOUNT")
         this.props.doctorProfile();
@@ -24,10 +24,13 @@ import {  MDBTable, MDBTableBody, MDBTableHead ,MDBContainer, MDBRow, MDBCol,  M
             // })
         
     }
+    
    
     render() {
        const{doctor}=this.props.test;
-       
+       let arr=doctor['education']; 
+    
+      
         return (
             <MDBContainer className="mb-5">
             <MDBCard>
@@ -57,15 +60,11 @@ import {  MDBTable, MDBTableBody, MDBTableHead ,MDBContainer, MDBRow, MDBCol,  M
       <tr>
           <th>Education</th>
             <td>
-               <tr><td>{}</td></tr>
+               <tr><td></td></tr>
                <tr>
                {
-                    console.log(JSON.stringify(doctor['education']))
+                    
             
-            //  console.log("PROFILE EDUCATION KEYS:"+Object.keys(doctor.education).length)
-            //  Object.keys(doctor.education).map(key=>{
-            //      console.log(doctor.education[key])
-            //  })
                
             }
                </tr>

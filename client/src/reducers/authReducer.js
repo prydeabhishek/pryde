@@ -6,7 +6,7 @@ const initialState = {
   isAuthenticated: false,
   user: {},
   loading: false,
-  doctor:{}
+  doctor:[]
 };
 
 export default function(state = initialState, action) {

@@ -37,23 +37,30 @@ router.post('/',paramValidate,(req,res)=>{
             return res.json({ emailnotfound: "Email not found" });
             }
             console.log(JSON.stringify(user))
-            if(HashPassword.decrypt(user.password)===password){
-               // console.log("User.password :"+ password);
-               // console.log("Decrypt password :"+HashPassword.decrypt(user.password));
-               res.cookie("RESPCOOKIE","HELLOTESTRESPONSE");
-               res.json({
-                    success: true,
-                    csrf_token:user.csrf_token,
-                    auth_token:user.auth_token,
-                    email:user.email,
-                    user:user 
-                });
+            //if(user.active)
+            if(user.active){
+                if(HashPassword.decrypt(user.password)===password){
+                    // console.log("User.password :"+ password);
+                    // console.log("Decrypt password :"+HashPassword.decrypt(user.password));
+                    res.cookie("RESPCOOKIE","HELLOTESTRESPONSE");
+                    res.json({
+                         success: true,
+                         csrf_token:user.csrf_token,
+                         auth_token:user.auth_token,
+                         email:user.email,
+                         user:user 
+                     });
+                 }
+                 else{
+                     return res
+                     .json({ passwordincorrect: "Password incorrect" });
+                 
+                 }
             }
             else{
-                return res
-                .json({ passwordincorrect: "Password incorrect" });
-            
+                return res.json({verify_email:"You Need To Verify Your Email First"})
             }
+           
 
 
        })//then end

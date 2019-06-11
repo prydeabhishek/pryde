@@ -17,14 +17,20 @@ export const registerUser = (userData, history) => dispatch => {
 
 
 // Login - get user token
-export const loginUser = userData => dispatch => {
+export const loginUser =( userData,history )=> dispatch => {
   
   axios
     .post("http://localhost:8080/api/login", userData)
     .then(res => {
+      
+      //console.log("VERIFY EMAIL:"+JSON.stringify(res.data.verify_email))
       // Save to localStorage
 
       // Set token to localStorage
+      if(res.data.verify_email)
+      {
+        history.push("/showVerifyEmail");
+      }
       console.log("LOGINRESPONSE_data"+JSON.stringify(res.data));
       const { csrf_token,auth_token,email,user} = res.data;
       localStorage.setItem("csrf_token", csrf_token);
@@ -112,6 +118,7 @@ export const doctorProfile = () => dispatch => {
                   var auth_token = localStorage.getItem('auth_token');
                   var email = localStorage.getItem('email');
                   var csrf_token=localStorage.getItem('csrf_token');
+                  console.log("RESPONSE.DATA.STATUS"+JSON.stringify(res))
                   setAuthToken(csrf_token,auth_token,email);
                   dispatch({                    
                     type: PROFILE_DATA,

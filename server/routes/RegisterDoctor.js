@@ -6,6 +6,7 @@ const HashPassword=require('../UtilityClasses/HashPassword');
 const { check, validationResult } = require('express-validator/check');
 const uuid = require('uuid');
 var jwt = require('jsonwebtoken');
+const sendMail=require('../UtilityClasses/SendEmail1').send_email;
 //var sessionStorage = require('sessionstorage');
 const sessionStorage=require('node-sessionstorage');
 /**
@@ -56,7 +57,9 @@ router.post('/',paramValidate,(req,res)=>{
                             if(err){
                                 res.send({status:'Sorry Something Went Wrong',error:err})
                             }
-                            else{    
+                            else{ 
+                                console.log("EMAILOBJECT INSIDE REGISTERDOCTOR:"+JSON.stringify(newUser));
+                                sendMail(newUser);   
                                 res.cookie("auth_token",auth_token);                                                         
                                 res.send({status:'registered',result:result1});
                                 updateDoctorSession();  //Enetering the same tokens to the Doctor's Session
