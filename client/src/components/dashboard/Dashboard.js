@@ -5,6 +5,8 @@ import { logoutUser } from "../../actions/authActions";
 import {  Route, Switch } from "react-router-dom";
 import StepperExample from '../register/mdbStep2';
 import Profile from '../layout/Profile';
+import PasswordChanged from '../layout/passwordChanged';
+import ChangePassword from '../layout/ChangePassword'
 class Dashboard extends Component {
   onLogoutClick = e => {
     e.preventDefault();
@@ -45,6 +47,8 @@ class Dashboard extends Component {
            <Switch>
            <Route path="/dashboard" exact component={Profile} />
            <Route  path="/dashboard/profile" component={StepperExample} />
+           <Route  path="/dashboard/changePassword" component={ChangePassword} />
+           <Route  path="/dashboard/passwordChanged" component={PasswordChanged} />
            </Switch>
             {/* <StepperExample />  */}
         </div>

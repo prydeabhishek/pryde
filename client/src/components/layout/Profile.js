@@ -60,14 +60,7 @@ import {  MDBTable, MDBTableBody, MDBTableHead ,MDBContainer, MDBRow, MDBCol,  M
       <tr>
           <th>Education</th>
             <td>
-               <tr><td></td></tr>
-               <tr>
-               {
-                    
-            
-               
-            }
-               </tr>
+              
            </td>          
       </tr>
       <tr>

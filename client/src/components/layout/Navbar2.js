@@ -1,21 +1,63 @@
 import React, { Component } from "react";
 import {connect} from 'react-redux'
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
-MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon,MDBInput ,MDBContainer} from "mdbreact";
+MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon,MDBInput ,MDBContainer,MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter,MDBBtn} from "mdbreact";
 import {Link,NavLink} from 'react-router-dom';
-import { logoutUser } from '../../actions/authActions';
+import { logoutUser,changePassword } from '../../actions/authActions';
+import { red } from "ansi-colors";
+import history from '../../history';
 const isEmpty = require("is-empty");
 class NavbarPage extends Component {
 state = {
   isOpen: false,
   doctor_loggedIn:false,
-  showMenu:false
+  showMenu:false,
+  modal14: false,
+  pass_data:{
+    password:'',
+    confirm_password:''    
+  },
+  pass_err:''
 };
+
+toggle = nr => () => {
+  
+  let modalNumber = 'modal' + nr
+  this.setState({
+    [modalNumber]: !this.state[modalNumber]
+  });
+}
 onLogoutClick=(e)=>{
   e.preventDefault();
     this.props.logoutUser()
 }
+onSubmitChangePassword=()=>{
+  let user_data=this.state.pass_data;
+  let {password,confirm_password} =this.state.pass_data;
+  let bool_password_equal=password.localeCompare(confirm_password);
+           if(bool_password_equal===0){
+            this.setState({
+              modal14: !this.state.modal14 });
+                this.props.changePassword(user_data,history);                
+           }
+           else {
+            //alert("Password Doesn't match");
+            this.setState({pass_err:"Password Doesn't Match"});
+            setTimeout(()=>{
+              this.setState({pass_err:""});
+            },3000)
+           //  this.toggle(14)
+           }
+}
 
+handleOnChangePassword=(e)=>{
+this.setState({
+           pass_data:{
+                     ...this.state.pass_data,
+                     [e.target.name]:e.target.value
+                    }
+          })
+}
 toggleCollapse = () => {
   this.setState({ isOpen: !this.state.isOpen });
 }
@@ -33,6 +75,7 @@ componentWillReceiveProps(nextProps){
 
 render() {
   return (
+    <>
     <MDBNavbar color="white" light expand="md">
     <MDBContainer>
       <MDBNavbarBrand>
@@ -64,7 +107,9 @@ render() {
               <MDBDropdownMenu >
                 {/* <Link to="/doctor" className="dropdown-item ">Logout</Link> */}
                 <MDBDropdownItem onClick={this.onLogoutClick}>Logout</MDBDropdownItem>
-                <MDBDropdownItem onClick={this.onChangePassword}>Change Password</MDBDropdownItem>
+                <MDBDropdownItem onClick={this.toggle(14)}>Change Password</MDBDropdownItem>
+                {/* <MDBDropdownItem ><NavLink to='/dashboard/changePassword'>Change Password</NavLink></MDBDropdownItem>  */}
+                
               </MDBDropdownMenu>
             </MDBDropdown>
           </MDBNavItem>
@@ -75,6 +120,21 @@ render() {
         </MDBCollapse>
       </MDBContainer>
     </MDBNavbar>
+
+
+    <MDBModal isOpen={this.state.modal14} toggle={this.toggle(14)} centered>
+          <MDBModalHeader toggle={this.toggle(14)}>Change Password</MDBModalHeader>
+          <MDBModalBody>
+            <input type="password" name="password" onChange={this.handleOnChangePassword} placeholder="Password" className="form-control" value={this.state.pass_data.password} /> <br />
+            <input type="password" name="confirm_password" onChange={this.handleOnChangePassword} placeholder="Confirm Password" className="form-control" value={this.state.pass_data.confirm_password} />
+            <span style={{color:'red'}}>{this.state.pass_err}</span>
+          </MDBModalBody>
+          <MDBModalFooter>
+            <MDBBtn color="secondary" onClick={this.toggle(14)}>Close</MDBBtn>
+            <MDBBtn color="primary" onClick={this.onSubmitChangePassword}>Change Password</MDBBtn>
+          </MDBModalFooter>
+        </MDBModal>
+    </>
     );
   }
 }
@@ -84,5 +144,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { logoutUser }
+  { logoutUser ,changePassword}
 )(NavbarPage);

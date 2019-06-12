@@ -111,6 +111,12 @@ class Login extends Component {
                   {errors.passwordincorrect}
                 </span>
             </div>
+            <div className="">
+            <p className="grey-text text-darken-1">
+               <Link to="/forgotPassword">Forgot Password</Link>
+              </p>
+            </div>
+            
             <div className="text-center">
             <input type="submit" className="btn btn-register"   value="Login" />
             </div>

@@ -157,3 +157,50 @@ export const logoutUser = () => dispatch => {
   // Set current user to empty object {} which will set isAuthenticated to false
   dispatch(setCurrentUser({}));
 };
+
+export const forgotPassword =(userData,history)=>dispatch=>{
+  axios.post('http://localhost:8080/forgot_password_doctor',userData)
+    .then(res =>{ console.log("ForgotPasswordAuthResponse :"+JSON.stringify(res));
+                if(res.data.status==='success')
+                {                  
+                 history.push("/forgotPasswordChanged")
+                 //dispatch(logoutUser({}));
+                }
+                  else{
+                     return "ERROR OCCURED"
+                  }
+                  })
+    .catch(err => {console.log(err)
+      dispatch({
+        type: GET_ERRORS,
+        payload: err
+      })
+    })
+}
+
+
+export const changePassword =(passwordData,history)=>dispatch=>{
+  console.log("CHANGE PASSWORD ACTION TRIGGERED:"+JSON.stringify(passwordData));
+ axios.post('http://localhost:8080/change_passsword_doctor',passwordData)
+    .then(res =>{ console.log("ChangePasswordAuthResponse :"+JSON.stringify(res));
+                if(res.data.status==='Update Success')
+                {
+                  localStorage.setItem('csrf_token',res.data.new_csrf_token);
+                  var auth_token = localStorage.getItem('auth_token');
+                  var email = localStorage.getItem('email');
+                  var csrf_token=localStorage.getItem('csrf_token');
+                  setAuthToken(csrf_token,auth_token,email);
+                 history.push("/dashboard/passwordChanged")
+                 //dispatch(logoutUser({}));
+                }
+                  else{
+                     return "ERROR OCCURED"
+                  }
+                  })
+    .catch(err => {console.log(err)
+      dispatch({
+        type: GET_ERRORS,
+        payload: err
+      })
+    })
+}

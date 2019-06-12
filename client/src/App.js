@@ -16,7 +16,10 @@ import ShowVerifyEmail from './components/auth/ShowVerifyEmail'
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import Token from "./components/auth/Token";
-import Profile from './components/layout/Profile'
+import Profile from './components/layout/Profile';
+import ForgotPassword from './components/layout/ForgotPassword'
+import ForgotPasswordChanged from './components/layout/ForgotPasswordChanged';
+import PasswordChanged from './components/layout/passwordChanged'
 import "./App.css";
 
 // // Check for token to keep user logged in
@@ -49,7 +52,8 @@ class App extends Component {
             <Route path="/register" component={RegisterLanding} />
             <Route  path="/login" component={LoginLanding} />
             <Route  path="/showVerifyEmail" component={ShowVerifyEmail} />
-           
+            <Route  path="/forgotPassword" component={ForgotPassword} />
+            <Route path="/forgotPasswordChanged" component={PasswordChanged} />
             <Switch>
             {/* <Route component={NoMatch} /> */}
               <PrivateRoute  path="/dashboard" component={Dashboard} />

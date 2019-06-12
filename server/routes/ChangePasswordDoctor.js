@@ -54,7 +54,8 @@ router.post('/',paramValidate,(req,res)=>{
                     console.log("***Connected To Database*****");  //testing Connection
                     // console.log(csrf());
                     // console.log(JSON.stringify(schema));
-                    var email=req.cookies['email'];
+                  //  var email=req.cookies['email'];
+                  var email=req.headers['email'];
                     console.log(req.body);
                     db.collection('DoctorProfile')
                     .updateOne({email},newvalues,(err,result)=>{
