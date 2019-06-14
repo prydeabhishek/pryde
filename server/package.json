@@ -7,9 +7,11 @@
   },
   "dependencies": {
     "assert": "^2.0.0",
+    "concurrently": "^4.1.0",
     "cookie-parser": "~1.4.4",
     "cookies": "^0.7.3",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "cryptr": "^4.0.2",
     "csurf": "^1.10.0",
     "debug": "~2.6.9",
