@@ -37,6 +37,6 @@
     "password-hash": "^1.2.2",
     "sessionstorage": "^0.1.0",
     "uuid": "^3.3.2",
-    "validator": "^10.11.0"
+    "validator": "^13.7.0"
   }
 }
